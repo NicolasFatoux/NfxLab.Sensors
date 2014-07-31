@@ -47,7 +47,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NfxLab.MicroFramework\NfxLab.MicroFramework\NfxLab.MicroFramework.csproj">
+    <ProjectReference Include="..\NfxLab.MicroFramework\NfxLab.MicroFramework.csproj">
       <Project>{A18D3694-CA9E-4851-915F-565835E2178A}</Project>
       <Name>NfxLab.MicroFramework</Name>
     </ProjectReference>
