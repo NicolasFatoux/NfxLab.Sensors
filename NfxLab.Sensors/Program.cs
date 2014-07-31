@@ -17,12 +17,16 @@ namespace NfxLab.Sensors
         static Log Log;
         static TemperatureHumiditySensorPro Sensor;
         static XivelyClient XivelyClient;
+        static Timer Timer;
 
         public static void Main()
         {
             try
             {
-                Log = new Log(new FileAppender(Configuration.LogPath), new DebugAppender());
+                Log = new Log(
+                    //new FileAppender(Configuration.LogPath), 
+                    new DebugAppender()
+                    );
                 Log.Info("Starting");
 
                 Log.Info("Initializing sensor");
@@ -33,7 +37,7 @@ namespace NfxLab.Sensors
                 XivelyClient = new XivelyClient(Configuration.XivelyApiKey, Configuration.XivelyFeedId);
 
                 Log.Info("Starting the timer");
-                var timer = new Timer(SendUpdate, null, new TimeSpan(0, 0, 0), Configuration.Interval);
+                Timer = new Timer(SendUpdate, null, new TimeSpan(0, 0, 1), Configuration.Interval);
 
                 Log.Info("Started");
                 Thread.Sleep(Timeout.Infinite);
@@ -47,7 +51,7 @@ namespace NfxLab.Sensors
         private static void SendUpdate(object state)
         {
             using (Log.ProfileBlock("Reading sensor"))
-                Sensor.Read();
+            Sensor.Read();
 
             Log.Info("Temperature:", Sensor.Temperature, "Humidity:", Sensor.Humidity);
 
