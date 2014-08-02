@@ -30,8 +30,7 @@ namespace NfxLab.Sensors
                 Log.Info("Starting");
 
                 Log.Info("Initializing sensor");
-                Sensor = new TemperatureHumiditySensorPro();
-                Sensor.Plug(BaseShield.DigitalPorts.Digital1);
+                Sensor = new TemperatureHumiditySensorPro(BaseShield.DigitalPorts.Digital1);
 
                 Log.Info("Initializing Xively client");
                 XivelyClient = new XivelyClient(Configuration.XivelyApiKey, Configuration.XivelyFeedId);
@@ -50,17 +49,24 @@ namespace NfxLab.Sensors
 
         private static void SendUpdate(object state)
         {
-            using (Log.ProfileBlock("Reading sensor"))
-            Sensor.Read();
+            try
+            {
+                Log.Info("Reading sensor");
+                Sensor.Read();
 
-            Log.Info("Temperature:", Sensor.Temperature, "Humidity:", Sensor.Humidity);
+                Log.Info("Temperature:", Sensor.Temperature, "Humidity:", Sensor.Humidity);
 
-            using (Log.ProfileBlock("Sending sensors data to Xively"))
+                Log.Info("Sending sensors data to Xively");
                 XivelyClient.Put(
                     new string[] { "Temperature", "Humidity" },
                     new object[] { Sensor.Temperature, Sensor.Humidity });
 
-            Log.Info("Sensors data sent");
+                Log.Info("Sensors data sent");
+            }
+            catch (Exception e)
+            {
+                Log.Warning(e);
+            }
         }
     }
 }
