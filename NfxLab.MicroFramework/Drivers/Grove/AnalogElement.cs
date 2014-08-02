@@ -9,13 +9,11 @@ namespace NfxLab.MicroFramework.Drivers.Grove
         protected Cpu.AnalogChannel Channel1 {get;private set;}
         protected Cpu.AnalogChannel Channel2 { get; private set; }
 
-        public void Plug(BaseShield.AnalogPorts port)
+        public AnalogElement(BaseShield.AnalogPorts port)
         {
             var channels = BaseShield.GetAnalogChannels(port);
             Channel1 = channels[0];
             Channel2 = channels[1];
-
-            Start();
         }
 
     }

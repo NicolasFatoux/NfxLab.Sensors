@@ -6,25 +6,20 @@ namespace NfxLab.MicroFramework.Drivers.Grove
 {
     public class PushButton : DigitalElement
     {
-        InterruptPort port;
+        InterruptPort interruptPort;
 
 
-        public override void Start()
+        public PushButton(BaseShield.DigitalPorts port)
+            : base(port)
         {
-            port = new InterruptPort(this.Pin1, true, Port.ResistorMode.PullDown, Port.InterruptMode.InterruptNone);
-            port.OnInterrupt += port_OnInterrupt;
+            interruptPort = new InterruptPort(this.Pin1, true, Port.ResistorMode.PullDown, Port.InterruptMode.InterruptNone);
+            interruptPort.OnInterrupt += port_OnInterrupt;
         }
 
         void port_OnInterrupt(uint data1, uint data2, DateTime time)
         {
             if (Push != null)
                 Push();
-        }
-
-        public override void Stop()
-        {
-            port.Dispose();
-            port = null;
         }
 
         public delegate void PushEventHandler();

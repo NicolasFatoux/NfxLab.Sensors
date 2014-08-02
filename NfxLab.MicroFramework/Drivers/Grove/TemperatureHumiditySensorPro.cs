@@ -42,7 +42,8 @@ namespace NfxLab.MicroFramework.Drivers.Grove
 
         #region Public methods
 
-        public override void Start()
+        public TemperatureHumiditySensorPro(BaseShield.DigitalPorts port)
+            : base(port)
         {
             outputPort = new TristatePort(Pin1, true, false, Port.ResistorMode.PullUp);
 
@@ -133,13 +134,6 @@ namespace NfxLab.MicroFramework.Drivers.Grove
 
             FrameworkLogs.Driver.Debug("Read OK");
             return true;
-        }
-
-        public override void Stop()
-        {
-            inputPort.Dispose();
-            outputPort.Dispose();
-            dataReceivedEvent = null;
         }
 
         #endregion
