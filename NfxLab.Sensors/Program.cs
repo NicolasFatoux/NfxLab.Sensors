@@ -24,7 +24,7 @@ namespace NfxLab.Sensors
             try
             {
                 Log = new Log(
-                    //new FileAppender(Configuration.LogPath), 
+                    new FileAppender(Configuration.LogPath),
                     new DebugAppender()
                     );
                 Log.Info("Starting");
@@ -54,12 +54,15 @@ namespace NfxLab.Sensors
                 Log.Info("Reading sensor");
                 Sensor.Read();
 
-                Log.Info("Temperature:", Sensor.Temperature, "Humidity:", Sensor.Humidity);
+                string temperature = Sensor.Temperature.ToString("f2");
+                string humidity = Sensor.Humidity.ToString("f2");
+
+                Log.Info("Temperature:", temperature, "Humidity:", humidity);
 
                 Log.Info("Sending sensors data to Xively");
                 XivelyClient.Put(
                     new string[] { "Temperature", "Humidity" },
-                    new object[] { Sensor.Temperature, Sensor.Humidity });
+                    new object[] { temperature, humidity });
 
                 Log.Info("Sensors data sent");
             }
