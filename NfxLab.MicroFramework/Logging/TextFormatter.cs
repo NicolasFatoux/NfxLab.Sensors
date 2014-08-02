@@ -4,22 +4,14 @@ using System.Text;
 
 namespace NfxLab.MicroFramework.Logging
 {
-    public class TextFormatter : ILogFormatter
+    public class TextFormatter
     {
 
         StringBuilder builder = new StringBuilder();
 
 
-
-        public object Format(DateTime time, string name, LogType type, int level, object[] datas)
+        public string Format(object[] datas)
         {
-            builder.Append(time);
-            builder.Append(' ');
-            builder.Append(name);
-            builder.Append(' ');
-            builder.Append(type);
-            builder.Append(' ', level);
-
             foreach (object data in datas)
             {
                 builder.Append('\t');
@@ -35,7 +27,7 @@ namespace NfxLab.MicroFramework.Logging
         void Append(object data)
         {
             if (data == null)
-                Append(' ');
+                Append("[NULL]");
             else if (data is Array)
                 Append((IEnumerable)data);
             else if (data is Hashtable)

@@ -7,80 +7,34 @@ namespace NfxLab.MicroFramework.Logging
 {
     public class Log
     {
+        TextFormatter formatter = new TextFormatter();
+
         public string Name { get; set; }
         public int Level { get; set; }
-        public Appender[] Appenders { get; set; }
+        public IAppender[] Appenders { get; set; }
 
-        public Log(params Appender[] appenders)
+        public Log(params IAppender[] appenders)
         {
             this.Appenders = appenders;
         }
 
-        public void Error(params object[] datas)
+        public void Info(params object[] data)
         {
-            Write(LogType.Error, datas);
-        }
-
-        public void Warning(params object[] datas)
-        {
-            Write(LogType.Warning, datas);
-        }
-
-        public void Info(params object[] datas)
-        {
-            Write(LogType.Info, datas);
+            Write(data);
         }
 
         [Conditional("DEBUG")]
-        public void Debug(params object[] datas)
+        public void Debug(params object[] data)
         {
-            Write(LogType.Debug, datas);
+            Write(data);
         }
 
-        [Conditional("PROFILE")]
-        public void Profile(params object[] datas)
+        private void Write(params object[] data)
         {
-            Write(LogType.Profile, datas);
-        }
+            string message = formatter.Format(data);
 
-        
-        public Block ErrorBlock(params object[] datas)
-        {
-            return new Block(this,LogType.Error, datas);
-        }
-
-        public Block WarningBlock(params object[] datas)
-        {
-            return new Block(this, LogType.Warning, datas);
-        }
-
-        public Block InfoBlock(params object[] datas)
-        {
-            return new Block(this, LogType.Info, datas);
-        }
-
-        public Block DebugBlock(params object[] datas)
-        {
-            return new Block(this, LogType.Debug, datas);
-        }
-
-        public ProfileBlock ProfileBlock(params object[] datas)
-        {
-            return new ProfileBlock(this, LogType.Profile, datas);
-        }
-
-
-        internal void Write(LogType type, object[] datas)
-        {
-            if (Appenders == null || datas == null)
-                return;
-
-            var time = DateTime.Now;
-            int level = Level;
-
-            foreach (Appender appender in Appenders)
-                appender.Write(time, Name, type, level, datas);
-        }
-
+            foreach (IAppender appender in Appenders)
+                appender.Write(message);
+        }        
     }
 }
