@@ -34,9 +34,9 @@ namespace NfxLab.MicroFramework.Drivers.Grove
 
         #region Properties
 
-        public float Humidity { get; private set; }
+        public double Humidity { get; private set; }
 
-        public float Temperature { get; private set; }
+        public double Temperature { get; private set; }
 
         #endregion
 
