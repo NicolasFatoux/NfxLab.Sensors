@@ -56,6 +56,7 @@
     <Compile Include="Logging\Log.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Logging\LogCategory.cs" />
     <Compile Include="Logging\TextFormatter.cs">
       <SubType>Code</SubType>
     </Compile>

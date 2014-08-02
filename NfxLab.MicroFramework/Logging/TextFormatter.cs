@@ -4,14 +4,32 @@ using System.Text;
 
 namespace NfxLab.MicroFramework.Logging
 {
-    public class TextFormatter
+    class TextFormatter
     {
-
         StringBuilder builder = new StringBuilder();
 
-
-        public string Format(object[] datas)
+        public string Format(LogCategory category, object[] datas)
         {
+            // Category
+            switch (category)
+            {
+                case LogCategory.Info:
+                    builder.Append("INFO");
+                    break;
+                case LogCategory.Debug:
+                    builder.Append("DEBUG");
+                    break;
+                case LogCategory.Warning:
+                    builder.Append("WARNING");
+                    break;
+                case LogCategory.Error:
+                    builder.Append("ERROR");
+                    break;
+                default:
+                    break;
+            }
+
+            // Data
             foreach (object data in datas)
             {
                 builder.Append('\t');
