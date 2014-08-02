@@ -42,12 +42,6 @@
     </Compile>
     <Compile Include="External\JSON.cs" />
     <Compile Include="External\Stopwatch.cs" />
-    <Compile Include="Logging\Appender.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logging\Block.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Logging\DebugAppender.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -57,22 +51,11 @@
     <Compile Include="Logging\FrameworkLogs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logging\ILogFormatter.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Logging\IAppender.cs" />
     <Compile Include="Logging\Log.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logging\LogType.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logging\ProfileBlock.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Logging\TextFormatter.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logging\TraceAppender.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Network\HttpClient.cs">

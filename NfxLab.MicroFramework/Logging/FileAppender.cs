@@ -4,7 +4,7 @@ using System.IO;
 
 namespace NfxLab.MicroFramework.Logging
 {
-    public class FileAppender : Appender
+    public class FileAppender : IAppender
     {
         StreamWriter writer;
 
@@ -14,11 +14,11 @@ namespace NfxLab.MicroFramework.Logging
             writer = new StreamWriter(stream);
         }
 
-        public override void Write(DateTime time, string name, LogType type, int level, object[] datas)
+        public void Write(string message)
         {
             try
             {
-                writer.WriteLine(Formatter.Format(time, name, type, level, datas));
+                writer.WriteLine(message);
             }
             catch
             {

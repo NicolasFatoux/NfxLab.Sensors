@@ -4,12 +4,11 @@ using System.Diagnostics;
 
 namespace NfxLab.MicroFramework.Logging
 {
-    public class DebugAppender : Appender
+    public class DebugAppender : IAppender
     {
-        public override void Write(DateTime time, string name, LogType type, int level, object[] data)
+        public void Write(string message)
         {
-            string line = (string)Formatter.Format(time, name, type, level, data);
-            Debug.Print(line);
+            Debug.Print(message);
         }
 
     }
