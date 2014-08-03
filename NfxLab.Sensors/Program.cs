@@ -27,16 +27,25 @@ namespace NfxLab.Sensors
                     new FileAppender(Configuration.LogPath),
                     new DebugAppender()
                     );
+
                 Log.Info("Starting");
+
+                Log.Info("Synchronizing time");
+                NtpClient ntp = new NtpClient
+                {
+                    TimeServer = Configuration.TimeServer,
+                    TimeZone = Configuration.TimeZone,
+                };
+                ntp.SyncTime();
 
                 Log.Info("Initializing sensor");
                 Sensor = new TemperatureHumiditySensorPro(BaseShield.DigitalPorts.Digital1);
 
                 Log.Info("Initializing Xively client");
                 XivelyClient = new XivelyClient(Configuration.XivelyApiKey, Configuration.XivelyFeedId);
-
+                
                 Log.Info("Starting the timer");
-                Timer = new Timer(SendUpdate, null, new TimeSpan(0, 0, 1), Configuration.Interval);
+                Timer = new Timer(SendUpdate, null, new TimeSpan(0, 0, 1), Configuration.UpdateInterval);
 
                 Log.Info("Started");
                 Thread.Sleep(Timeout.Infinite);
