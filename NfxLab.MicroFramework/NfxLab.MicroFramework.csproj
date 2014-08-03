@@ -49,9 +49,6 @@
     <Compile Include="Logging\FileAppender.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logging\FrameworkLogs.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Logging\IAppender.cs" />
     <Compile Include="Logging\Log.cs">
       <SubType>Code</SubType>
