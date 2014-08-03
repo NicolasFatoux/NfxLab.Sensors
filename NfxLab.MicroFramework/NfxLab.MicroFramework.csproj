@@ -54,7 +54,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logging\LogCategory.cs" />
-    <Compile Include="Logging\TextFormatter.cs">
+    <Compile Include="Logging\LogFormatter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Network\HttpClient.cs">
@@ -69,6 +69,7 @@
     <Compile Include="Network\HttpStatusCode.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Network\NtpClient.cs" />
     <Compile Include="Network\SecurePacket.cs">
       <SubType>Code</SubType>
     </Compile>

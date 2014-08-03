@@ -7,7 +7,7 @@ namespace NfxLab.MicroFramework.Logging
 {
     public class Log
     {
-        TextFormatter formatter = new TextFormatter();
+        LogFormatter formatter = new LogFormatter();
 
         public string Name { get; set; }
         public int Level { get; set; }

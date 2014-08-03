@@ -4,12 +4,16 @@ using System.Text;
 
 namespace NfxLab.MicroFramework.Logging
 {
-    class TextFormatter
+    class LogFormatter
     {
         StringBuilder builder = new StringBuilder();
 
         public string Format(LogCategory category, object[] datas)
         {
+            // Time
+            builder.Append(DateTime.Now);
+            builder.Append('\t');
+
             // Category
             switch (category)
             {
